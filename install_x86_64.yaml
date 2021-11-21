@@ -148,7 +148,7 @@ spec:
       containers:
       - env:
         - name: TZ
-          value: America/Sao_Paulo
+          value: Australia/Sydney
         - name: PUID
           value: "1000"
         - name: PGID
@@ -232,7 +232,7 @@ spec:
       containers:
       - env:
         - name: TZ
-          value: America/Sao_Paulo
+          value: Australia/Sydney
         - name: UID
           value: "1000"
         - name: GID
@@ -287,7 +287,7 @@ spec:
       containers:
       - env:
         - name: TZ
-          value: America/Sao_Paulo
+          value: Australia/Sydney
         - name: PUID
           value: "1000"
         - name: PGID
@@ -407,7 +407,7 @@ spec:
       containers:
       - env:
         - name: TZ
-          value: America/Sao_Paulo
+          value: Australia/Sydney
         - name: PUID
           value: "1000"
         - name: PGID
@@ -505,7 +505,7 @@ spec:
       containers:
       - env:
         - name: TZ
-          value: America/Sao_Paulo
+          value: Australia/Sydney
         - name: PUID
           value: "1000"
         - name: PGID
@@ -603,7 +603,7 @@ spec:
       containers:
       - env:
         - name: TZ
-          value: America/Sao_Paulo
+          value: Australia/Sydney
         - name: PUID
           value: "1000"
         - name: PGID

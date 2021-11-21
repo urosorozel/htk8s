@@ -148,12 +148,12 @@ spec:
       containers:
       - env:
         - name: TZ
-          value: America/Sao_Paulo
+          value: Australia/Sydney
         - name: PUID
           value: "1000"
         - name: PGID
           value: "1000"
-        image: linuxserver/bazarr:arm32v7-latest
+        image: linuxserver/bazarr:arm32v6-latest
         name: bazarr
         ports:
         - containerPort: 6767
@@ -232,7 +232,7 @@ spec:
       containers:
       - env:
         - name: TZ
-          value: America/Sao_Paulo
+          value: Australia/Sydney
         - name: UID
           value: "1000"
         - name: GID
@@ -287,12 +287,12 @@ spec:
       containers:
       - env:
         - name: TZ
-          value: America/Sao_Paulo
+          value: Australia/Sydney
         - name: PUID
           value: "1000"
         - name: PGID
           value: "1000"
-        image: linuxserver/jackett:arm32v7-latest
+        image: linuxserver/jackett:arm32v6-latest
         name: jackett
         ports:
         - containerPort: 9117
@@ -407,12 +407,12 @@ spec:
       containers:
       - env:
         - name: TZ
-          value: America/Sao_Paulo
+          value: Australia/Sydney
         - name: PUID
           value: "1000"
         - name: PGID
           value: "1000"
-        image: linuxserver/radarr:arm32v7-latest
+        image: linuxserver/radarr:arm32v6-latest
         livenessProbe:
           exec:
             command:
@@ -505,12 +505,12 @@ spec:
       containers:
       - env:
         - name: TZ
-          value: America/Sao_Paulo
+          value: Australia/Sydney
         - name: PUID
           value: "1000"
         - name: PGID
           value: "1000"
-        image: linuxserver/sonarr:arm32v7-latest
+        image: linuxserver/sonarr:arm32v6-latest
         livenessProbe:
           exec:
             command:
@@ -603,12 +603,12 @@ spec:
       containers:
       - env:
         - name: TZ
-          value: America/Sao_Paulo
+          value: Australia/Sydney
         - name: PUID
           value: "1000"
         - name: PGID
           value: "1000"
-        image: linuxserver/transmission:arm32v7-latest
+        image: linuxserver/transmission:arm32v6-latest
         name: transmission
         ports:
         - containerPort: 9091
@@ -649,9 +649,9 @@ spec:
           name: htpc-home
           subPath: watch
       - args:
-        - "echo starting;
-          echo '{\"download-dir\": \"/downloads\", \"rpc-whitelist-enabled\": false, \"rpc-host-whitelist-enabled\": false}' > /config/settings.json;
-          echo done;"
+        - 'echo starting; echo ''{"download-dir": "/downloads", "rpc-whitelist-enabled":
+          false, "rpc-host-whitelist-enabled": false}'' > /config/settings.json; echo
+          done;'
         command:
         - sh
         - -c
