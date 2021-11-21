@@ -153,7 +153,7 @@ spec:
           value: "1000"
         - name: PGID
           value: "1000"
-        image: linuxserver/bazarr:arm32v7-latest
+        image: linuxserver/bazarr:arm64v8-latest
         name: bazarr
         ports:
         - containerPort: 6767
@@ -292,7 +292,7 @@ spec:
           value: "1000"
         - name: PGID
           value: "1000"
-        image: linuxserver/jackett:arm32v7-latest
+        image: linuxserver/jackett:arm64v8-latest
         name: jackett
         ports:
         - containerPort: 9117
@@ -412,7 +412,7 @@ spec:
           value: "1000"
         - name: PGID
           value: "1000"
-        image: linuxserver/radarr:arm32v7-latest
+        image: linuxserver/radarr:arm64v8-latest
         livenessProbe:
           exec:
             command:
@@ -510,7 +510,7 @@ spec:
           value: "1000"
         - name: PGID
           value: "1000"
-        image: linuxserver/sonarr:arm32v7-latest
+        image: linuxserver/sonarr:arm64v8-latest
         livenessProbe:
           exec:
             command:
@@ -608,7 +608,7 @@ spec:
           value: "1000"
         - name: PGID
           value: "1000"
-        image: linuxserver/transmission:arm32v7-latest
+        image: linuxserver/transmission:arm64v8-latest
         name: transmission
         ports:
         - containerPort: 9091
