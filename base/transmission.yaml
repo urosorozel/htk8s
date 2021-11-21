@@ -45,20 +45,20 @@ spec:
         - mountPath: /watch
           name: htpc-home
           subPath: watch       
-      - name: setup-transmission
-        image: busybox
-        securityContext:
-          runAsUser: 1000
-          runAsGroup: 1000        
-        command: ["sh", "-c"]
-        args:
-          - "echo starting;
-            echo '{\"download-dir\": \"/downloads\", \"rpc-whitelist-enabled\": false, \"rpc-host-whitelist-enabled\": false}' > /config/settings.json;
-            echo done;"
-        volumeMounts: 
-        - mountPath: /config 
-          name: htpc-home
-          subPath: transmission
+#      - name: setup-transmission
+#        image: busybox
+#        securityContext:
+#          runAsUser: 1000
+#          runAsGroup: 1000        
+#        command: ["sh", "-c"]
+#        args:
+#          - "echo starting;
+#            echo '{\"download-dir\": \"/downloads\", \"rpc-whitelist-enabled\": false, \"rpc-host-whitelist-enabled\": false}' > /config/settings.json;
+#            echo done;"
+#        volumeMounts: 
+#        - mountPath: /config 
+#          name: htpc-home
+#          subPath: transmission
       containers:    
       - name: transmission
         image: linuxserver/transmission

@@ -648,22 +648,6 @@ spec:
         - mountPath: /watch
           name: htpc-home
           subPath: watch
-      - args:
-        - 'echo starting; echo ''{"download-dir": "/downloads", "rpc-whitelist-enabled":
-          false, "rpc-host-whitelist-enabled": false}'' > /config/settings.json; echo
-          done;'
-        command:
-        - sh
-        - -c
-        image: busybox
-        name: setup-transmission
-        securityContext:
-          runAsGroup: 1000
-          runAsUser: 1000
-        volumeMounts:
-        - mountPath: /config
-          name: htpc-home
-          subPath: transmission
       securityContext:
         fsGroup: 1000
       volumes:
