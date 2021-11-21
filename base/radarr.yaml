@@ -57,7 +57,7 @@ spec:
       containers:
       - env:
         - name: TZ
-          value: Pacific/Auckland
+          value: Australia/Sydney
         - name: PUID
           value: "1000"
         - name: PGID
