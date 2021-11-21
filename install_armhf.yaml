@@ -649,9 +649,9 @@ spec:
           name: htpc-home
           subPath: watch
       - args:
-        - 'echo starting; echo ''{"download-dir": "/downloads", "rpc-whitelist-enabled":
-          false, "rpc-host-whitelist-enabled": false}'' > /config/settings.json; echo
-          done;'
+        - "echo starting;
+          echo '{\"download-dir\": \"/downloads\", \"rpc-whitelist-enabled\": false, \"rpc-host-whitelist-enabled\": false}' > /config/settings.json;
+          echo done;"
         command:
         - sh
         - -c
