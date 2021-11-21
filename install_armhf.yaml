@@ -354,6 +354,8 @@ spec:
           value: "1000"
         - name: PGID
           value: "1000"
+        - name: BASE_URL
+          value: /ombi
         image: linuxserver/ombi
         name: ombi
         ports:
