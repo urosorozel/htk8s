@@ -30,3 +30,7 @@ spec:
         backend:
           serviceName: transmission
           servicePort: webui
+      - path: /ombi
+        backend:
+          serviceName: ombi
+          servicePort: webui

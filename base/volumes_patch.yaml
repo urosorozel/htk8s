@@ -14,6 +14,19 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  name: ombi
+spec:
+  template:
+    spec:
+      volumes:
+      - hostPath:
+          path: /opt/htpc
+          type: DirectoryOrCreate
+        name: htpc-home
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
   name: radarr
 spec:
   template:

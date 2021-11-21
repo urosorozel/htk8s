@@ -62,6 +62,23 @@ kind: Service
 metadata:
   labels:
     app: htpc
+  name: ombi
+  namespace: htpc
+spec:
+  ports:
+  - name: webui
+    port: 3579
+    protocol: TCP
+    targetPort: 3579
+  selector:
+    app: htpc
+    run: ombi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: htpc
   name: radarr
   namespace: htpc
 spec:
@@ -301,6 +318,62 @@ spec:
         - mountPath: /config
           name: htpc-home
           subPath: jackett
+      securityContext:
+        fsGroup: 1000
+      volumes:
+      - hostPath:
+          path: /opt/htpc
+          type: DirectoryOrCreate
+        name: htpc-home
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: htpc
+    run: ombi
+  name: ombi
+  namespace: htpc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: htpc
+      run: ombi
+  template:
+    metadata:
+      labels:
+        app: htpc
+        run: ombi
+    spec:
+      containers:
+      - env:
+        - name: TZ
+          value: Australia/Sydney
+        - name: PUID
+          value: "1000"
+        - name: PGID
+          value: "1000"
+        image: linuxserver/ombi
+        name: ombi
+        ports:
+        - containerPort: 3579
+          name: webui
+        volumeMounts:
+        - mountPath: /config
+          name: htpc-home
+          subPath: ombi
+      initContainers:
+      - command:
+        - sh
+        - -c
+        - chown -R 1000:1000 /config
+        image: busybox
+        name: chown
+        volumeMounts:
+        - mountPath: /config
+          name: htpc-home
+          subPath: ombi
       securityContext:
         fsGroup: 1000
       volumes:
@@ -632,3 +705,7 @@ spec:
           serviceName: transmission
           servicePort: webui
         path: /transmission
+      - backend:
+          serviceName: ombi
+          servicePort: webui
+        path: /ombi
