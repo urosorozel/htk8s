@@ -608,6 +608,10 @@ spec:
           value: "1000"
         - name: PGID
           value: "1000"
+        - name: WHITELIST
+          value: ""
+        - name: HOST_WHITELIST
+          value: ""
         image: linuxserver/transmission:amd64-latest
         name: transmission
         ports:
