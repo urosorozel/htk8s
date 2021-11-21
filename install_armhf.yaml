@@ -638,3 +638,10 @@ spec:
               name: webui
         path: /transmission
         pathType: Exact
+      - backend:
+          service:
+            name: ombi
+            port:
+              name: webui
+        path: /ombi
+        pathType: Exact

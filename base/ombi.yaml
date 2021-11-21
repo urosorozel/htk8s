@@ -1,0 +1,86 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ombi
+spec:
+  ports:
+  - port: 3579
+    protocol: TCP
+    targetPort: 3579
+    name: webui
+  selector:
+    run: ombi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: ombi
+  name: ombi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: ombi
+  template:
+    metadata:
+      labels:
+        run: ombi
+    spec:
+      securityContext:
+        # runAsUser: 1000
+        # runAsGroup: 1000
+        fsGroup: 1000
+      initContainers:
+      - name: chown
+        image: busybox
+        command: ["sh", "-c", "chown -R 1000:1000 /config"]
+        volumeMounts:
+        - mountPath: /config
+          name: htpc-home
+          subPath: ombi
+      # - name: config
+      #   image: busybox
+      #   command: ["sh", "-c"]
+      #   securityContext:
+      #     runAsUser: 1000
+      #     runAsGroup: 1000
+      #   args:
+      #     - "echo start;[[ ! -f /config/config.xml ]] && echo '<Config><UrlBase>/$(ombi)</UrlBase></Config>'> /config/config.xml;echo end;"
+        volumeMounts:
+        - mountPath: /config
+          name: htpc-home
+          subPath: ombi
+      containers:
+      - env:
+        - name: TZ
+          value: Australia/Sydney
+        - name: PUID
+          value: "1000"
+        - name: PGID
+          value: "1000"
+        image: linuxserver/ombi
+        name: ombi
+        ports:
+        - containerPort: 3579
+          name: webui
+        # livenessProbe:
+        #   exec:
+        #     command:
+        #     - /bin/sh
+        #     - -c
+        #     - curl "http://localhost:3579/ombi/api/health?ApiKey=$(sed -ne '/ApiKey/{s/.*<ApiKey>\(.*\)<\/ApiKey>.*/\1/p;q;}' </config/config.xml)"
+        #   initialDelaySeconds: 30
+        #   periodSeconds: 10
+        # readinessProbe:
+        #   exec:
+        #     command:
+        #     - /bin/sh
+        #     - -c
+        #     - curl "http://localhost:3579/ombi/api/system/status?ApiKey=$(sed -ne '/ApiKey/{s/.*<ApiKey>\(.*\)<\/ApiKey>.*/\1/p;q;}' </config/config.xml)"
+        #   initialDelaySeconds: 30
+        #   periodSeconds: 10
+        volumeMounts:
+        - mountPath: /config
+          name: htpc-home
+          subPath: ombi

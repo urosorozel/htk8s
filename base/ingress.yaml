@@ -48,3 +48,10 @@ spec:
             name: transmission
             port:
               name: webui
+      - path: /ombi
+        pathType: Exact
+        backend:
+          service:
+            name: ombi
+            port:
+              name: webui
