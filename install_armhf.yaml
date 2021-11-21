@@ -670,51 +670,30 @@ spec:
   - http:
       paths:
       - backend:
-          service:
-            name: emby
-            port:
-              name: webui
+          serviceName: emby
+          servicePort: webui
         path: /
-        pathType: Exact
       - backend:
-          service:
-            name: jackett
-            port:
-              name: webui
+          serviceName: jackett
+          servicePort: webui
         path: /jackett
-        pathType: Exact
       - backend:
-          service:
-            name: sonarr
-            port:
-              name: webui
+          serviceName: sonarr
+          servicePort: webui
         path: /sonarr
-        pathType: Exact
       - backend:
-          service:
-            name: radarr
-            port:
-              name: webui
+          serviceName: radarr
+          servicePort: webui
         path: /radarr
-        pathType: Exact
       - backend:
-          service:
-            name: bazarr
-            port:
-              name: webui
+          serviceName: bazarr
+          servicePort: webui
         path: /bazarr
-        pathType: Exact
       - backend:
-          service:
-            name: transmission
-            port:
-              name: webui
+          serviceName: transmission
+          servicePort: webui
         path: /transmission
-        pathType: Exact
       - backend:
-          service:
-            name: ombi
-            port:
-              name: webui
+          serviceName: ombi
+          servicePort: webui
         path: /ombi
-        pathType: Exact
