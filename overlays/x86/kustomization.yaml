@@ -13,7 +13,5 @@ images:
     newTag: amd64-latest
   - name: linuxserver/bazarr
     newTag: amd64-latest
-  - name: linuxserver/transmission
-    newTag: amd64-latest
   - name: emby/embyserver
     newTag: latest

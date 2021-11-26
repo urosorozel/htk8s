@@ -12,7 +12,6 @@ resources:
 - radarr.yaml
 - sonarr.yaml
 - bazarr.yaml
-- transmission.yaml
 - emby.yaml
 - ingress.yaml
 - ombi.yaml

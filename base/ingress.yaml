@@ -2,49 +2,44 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: htpc
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web
 spec:
   rules:
   - http:
       paths:
       - path: /
-        pathType: Exact
+        pathType: Prefix
         backend:
           service:
             name: emby
             port:
               name: webui
       - path: /jackett
-        pathType: Exact
+        pathType: Prefix
         backend:
           service:
             name: jackett
             port:
               name: webui
       - path: /sonarr
-        pathType: Exact
+        pathType: Prefix
         backend:
           service:
             name: sonarr
             port:
               name: webui
       - path: /radarr
-        pathType: Exact
+        pathType: Prefix
         backend:
           service:
             name: radarr
             port:
               name: webui
       - path: /bazarr
-        pathType: Exact
+        pathType: Prefix
         backend:
           service:
             name: bazarr
-            port:
-              name: webui
-      - path: /transmission
-        pathType: Exact
-        backend:
-          service:
-            name: transmission
             port:
               name: webui
