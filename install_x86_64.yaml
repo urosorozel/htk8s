@@ -350,9 +350,9 @@ spec:
       - env:
         - name: TZ
           value: Australia/Sydney
-        - name: UID
+        - name: PUID
           value: "1000"
-        - name: GID
+        - name: PGID
           value: "1000"
         image: linuxserver/jellyfin:amd64-latest
         name: jellyfin
@@ -363,6 +363,12 @@ spec:
         - containerPort: 8920
           name: webui-ssl
           protocol: TCP
+        - containerPort: 7359
+          name: discover
+          protocol: UDP
+        - containerPort: 1900
+          name: dlna
+          protocol: UDP
         volumeMounts:
         - mountPath: /config
           name: htpc-home
