@@ -67,9 +67,9 @@ metadata:
 spec:
   ports:
   - name: webui
-    port: 3579
+    port: 8096
     protocol: TCP
-    targetPort: 3579
+    targetPort: 8096
   selector:
     app: htpc
     run: jellyfin
