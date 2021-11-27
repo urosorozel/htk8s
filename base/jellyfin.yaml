@@ -28,47 +28,31 @@ spec:
         run: jellyfin
     spec:
       securityContext:
-        # runAsUser: 1000
-        # runAsGroup: 1000
         fsGroup: 1000
-      initContainers:
-      - name: chown
-        image: busybox
-        command: ["sh", "-c", "chown -R 1000:1000 /config"]
-        volumeMounts:
-        - mountPath: /config
-          name: htpc-home
-          subPath: jellyfin
       containers:
       - env:
         - name: TZ
           value: Australia/Sydney
-        - name: PUID
+        - name: UID
           value: "1000"
-        - name: PGID
+        - name: GID
           value: "1000"
-        - name: BASE_URL
-          value: "/jellyfin"
         image: linuxserver/jellyfin
         name: jellyfin
         ports:
-        - containerPort: 3579
+        - containerPort: 8096
           name: webui
-        # livenessProbe:
-        #   exec:
-        #     command:
-        #     - /bin/sh
-        #     - -c
-        #   initialDelaySeconds: 30
-        #   periodSeconds: 10
-        # readinessProbe:
-        #   exec:
-        #     command:
-        #     - /bin/sh
-        #     - -c
-        #   initialDelaySeconds: 30
-        #   periodSeconds: 10
-        volumeMounts:
-        - mountPath: /config
+          protocol: TCP
+        - containerPort: 8920
+          name: webui-ssl
+          protocol: TCP
+        volumeMounts: 
+        - mountPath: /config 
           name: htpc-home
           subPath: jellyfin
+        - mountPath: /tv 
+          name: htpc-home
+          subPath: media/tv  
+        - mountPath: /movies 
+          name: htpc-home
+          subPath: media/movies     

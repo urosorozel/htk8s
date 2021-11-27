@@ -350,32 +350,29 @@ spec:
       - env:
         - name: TZ
           value: Australia/Sydney
-        - name: PUID
+        - name: UID
           value: "1000"
-        - name: PGID
+        - name: GID
           value: "1000"
-        - name: BASE_URL
-          value: /jellyfin
         image: linuxserver/jellyfin:amd64-latest
         name: jellyfin
         ports:
-        - containerPort: 3579
+        - containerPort: 8096
           name: webui
+          protocol: TCP
+        - containerPort: 8920
+          name: webui-ssl
+          protocol: TCP
         volumeMounts:
         - mountPath: /config
           name: htpc-home
           subPath: jellyfin
-      initContainers:
-      - command:
-        - sh
-        - -c
-        - chown -R 1000:1000 /config
-        image: busybox
-        name: chown
-        volumeMounts:
-        - mountPath: /config
+        - mountPath: /tv
           name: htpc-home
-          subPath: jellyfin
+          subPath: media/tv
+        - mountPath: /movies
+          name: htpc-home
+          subPath: media/movies
       securityContext:
         fsGroup: 1000
       volumes:

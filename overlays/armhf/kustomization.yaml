@@ -16,5 +16,5 @@ images:
   - name: linuxserver/bazarr
     newTag: arm64v8-latest
   - name: emby/embyserver
-    newName: emby/embyserver_arm32v7
+    newName: emby/embyserver_arm64v8
     newTag: latest
