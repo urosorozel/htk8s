@@ -5,6 +5,8 @@ bases:
 - ../../base
 
 images:
+  - name: linuxserver/jellyfin
+    newTag: arm64v8-latest
   - name: linuxserver/jackett
     newTag: arm64v8-latest
   - name: linuxserver/sonarr

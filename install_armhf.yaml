@@ -62,6 +62,23 @@ kind: Service
 metadata:
   labels:
     app: htpc
+  name: jellyfin
+  namespace: htpc
+spec:
+  ports:
+  - name: webui
+    port: 3579
+    protocol: TCP
+    targetPort: 3579
+  selector:
+    app: htpc
+    run: jellyfin
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: htpc
   name: ombi
   namespace: htpc
 spec:
@@ -301,6 +318,64 @@ spec:
         - mountPath: /config
           name: htpc-home
           subPath: jackett
+      securityContext:
+        fsGroup: 1000
+      volumes:
+      - hostPath:
+          path: /opt/htpc
+          type: DirectoryOrCreate
+        name: htpc-home
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: htpc
+    run: jellyfin
+  name: jellyfin
+  namespace: htpc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: htpc
+      run: jellyfin
+  template:
+    metadata:
+      labels:
+        app: htpc
+        run: jellyfin
+    spec:
+      containers:
+      - env:
+        - name: TZ
+          value: Australia/Sydney
+        - name: PUID
+          value: "1000"
+        - name: PGID
+          value: "1000"
+        - name: BASE_URL
+          value: /jellyfin
+        image: linuxserver/jellyfin:arm64v8-latest
+        name: jellyfin
+        ports:
+        - containerPort: 3579
+          name: webui
+        volumeMounts:
+        - mountPath: /config
+          name: htpc-home
+          subPath: jellyfin
+      initContainers:
+      - command:
+        - sh
+        - -c
+        - chown -R 1000:1000 /config
+        image: busybox
+        name: chown
+        volumeMounts:
+        - mountPath: /config
+          name: htpc-home
+          subPath: jellyfin
       securityContext:
         fsGroup: 1000
       volumes:
@@ -563,11 +638,9 @@ spec:
           type: DirectoryOrCreate
         name: htpc-home
 ---
-apiVersion: networking.k8s.io/v1
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  annotations:
-    traefik.ingress.kubernetes.io/router.entrypoints: web
   labels:
     app: htpc
   name: htpc
@@ -577,37 +650,34 @@ spec:
   - http:
       paths:
       - backend:
-          service:
-            name: emby
-            port:
-              name: webui
+          serviceName: emby
+          servicePort: webui
         path: /
-        pathType: Prefix
       - backend:
-          service:
-            name: jackett
-            port:
-              name: webui
+          serviceName: jackett
+          servicePort: webui
         path: /jackett
-        pathType: Prefix
       - backend:
-          service:
-            name: sonarr
-            port:
-              name: webui
+          serviceName: sonarr
+          servicePort: webui
         path: /sonarr
-        pathType: Prefix
       - backend:
-          service:
-            name: radarr
-            port:
-              name: webui
+          serviceName: radarr
+          servicePort: webui
         path: /radarr
-        pathType: Prefix
       - backend:
-          service:
-            name: bazarr
-            port:
-              name: webui
+          serviceName: bazarr
+          servicePort: webui
         path: /bazarr
-        pathType: Prefix
+      - backend:
+          serviceName: transmission
+          servicePort: webui
+        path: /transmission
+      - backend:
+          serviceName: ombi
+          servicePort: webui
+        path: /ombi
+      - backend:
+          serviceName: jellyfin
+          servicePort: webui
+        path: /jellyfin

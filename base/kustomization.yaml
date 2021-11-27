@@ -8,6 +8,7 @@ commonLabels:
 
 resources:
 - namespace.yaml
+- jellyfin.yaml
 - jackett.yaml
 - radarr.yaml
 - sonarr.yaml
