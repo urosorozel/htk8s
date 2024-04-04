@@ -18,4 +18,4 @@ images:
   - name: emby/embyserver
     newTag: 4.9.0.12
   - name: linuxserver/ombi
-    newTag: 4.43.5-ls186
+    newTag: v4.43.5-ls186

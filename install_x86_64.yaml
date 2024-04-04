@@ -292,7 +292,7 @@ spec:
           value: "1000"
         - name: PGID
           value: "1000"
-        image: linuxserver/ombi:4.43.5-ls186
+        image: linuxserver/ombi:v4.43.5-ls186
         name: ombi
         ports:
         - containerPort: 3579
