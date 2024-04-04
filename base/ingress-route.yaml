@@ -60,3 +60,12 @@ spec:
       name: transmission
       namespace: "htpc"
       port: 9091
+  - kind: Rule
+    match: PathPrefix(`/ombi`)
+    middlewares: []
+    priority: 0
+    services:
+    - kind: Service
+      name: ombi
+      namespace: "htpc"
+      port: 3579
