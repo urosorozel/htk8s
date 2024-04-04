@@ -45,6 +45,23 @@ kind: Service
 metadata:
   labels:
     app: htpc
+  name: ombi
+  namespace: htpc
+spec:
+  ports:
+  - name: webui
+    port: 3579
+    protocol: TCP
+    targetPort: 3579
+  selector:
+    app: htpc
+    run: ombi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: htpc
   name: jackett
   namespace: htpc
 spec:
