@@ -20,6 +20,17 @@ spec:
         app: htpc
         run: readarr
     spec:
+      initContainers:
+      - name: chown
+        image: busybox
+        command: ["sh", "-c", "chown -R 1000:1000 /config && chown -R 1000:1000 /books"]
+        volumeMounts:
+        - mountPath: /config
+          name: htpc-home
+          subPath: readarr
+        - mountPath: /books
+          name: htpc-home
+          subPath: media/books
       containers:
       - env:
         - name: TZ
