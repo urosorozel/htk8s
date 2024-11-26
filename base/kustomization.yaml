@@ -16,6 +16,7 @@ resources:
 - emby
 - jellyfin
 - ombi
+- readerr
 - ingress-route.yaml
 
 patchesStrategicMerge:

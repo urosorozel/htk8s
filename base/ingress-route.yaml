@@ -69,3 +69,12 @@ spec:
       name: ombi
       namespace: "htpc"
       port: 3579
+  - kind: Rule
+    match: PathPrefix(`/readerr`)
+    middlewares: []
+    priority: 0
+    services:
+    - kind: Service
+      name: readerr
+      namespace: "htpc"
+      port: 8787
