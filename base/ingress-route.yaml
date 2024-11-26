@@ -70,11 +70,11 @@ spec:
       namespace: "htpc"
       port: 3579
   - kind: Rule
-    match: PathPrefix(`/readerr`)
+    match: PathPrefix(`/readarr`)
     middlewares: []
     priority: 0
     services:
     - kind: Service
-      name: readerr
+      name: readarr
       namespace: "htpc"
       port: 8787
