@@ -20,6 +20,6 @@ images:
   - name: linuxserver/ombi
     newTag: v4.43.5-ls186
   - name: linuxserver/jellyfin
-    newTag: 10.8.13-1-ls6
+    newTag: 10.10.3ubu2404-ls46
   - name: linuxserver/readarr
     newTag: nightly-0.4.5.2688-ls355
